@@ -1,54 +1,72 @@
 
-# 🤖 RAG Chatbot with PDF (Streamlit + LangChain + Groq)
+# RAG Chatbot with PDF
 
-This is a simple Retrieval-Augmented Generation (RAG) chatbot built using **Streamlit**, **LangChain**, **HuggingFace embeddings**, **Chroma vector store**, and **Groq's LLaMA3** LLM. It allows users to upload a PDF and ask context-aware questions based on the document.
-
----
-
-## 📦 Features
-
-- ✅ Upload and process PDF documents  
-- ✅ Chunk text using recursive character splitting  
-- ✅ Embed documents using `sentence-transformers/all-MiniLM-L6-v2`  
-- ✅ Store and retrieve vectors using Chroma  
-- ✅ Query documents using Groq's LLaMA3 model via LangChain  
-- ✅ Interactive chat interface with memory using Streamlit  
+A Streamlit-based Retrieval-Augmented Generation (RAG) chatbot application that allows users to upload PDF documents and ask questions about their content. The chatbot leverages LangChain, Groq LLM, and Hugging Face embeddings for document retrieval and conversational AI.
 
 ---
 
-## 🚀 Getting Started
+## Features
 
-### 1. Clone the repository
+- Upload one or multiple PDF files (supports only PDFs).
+- Automatically processes PDFs by splitting into chunks with page metadata.
+- Creates embeddings using Hugging Face's `all-MiniLM-L6-v2` model.
+- Uses Groq's LLaMA 3 8B model for conversational question answering.
+- Displays top matching document chunks for transparency.
+- Supports chat history with download and clear options.
+- Rate limits user input to avoid rapid querying.
 
-```bash
-git clone https://github.com/RohiniMaity/RAG-PDF-Chatbot.git
-cd RAG-PDF-Chatbot
-```
+---
 
-### 2. Create and activate a virtual environment (optional)
+## Setup & Installation
 
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+### Prerequisites
 
-### 3. Install dependencies
+- Python 3.8+
+- [Streamlit](https://streamlit.io/)
+- [Groq API Key](https://www.groq.com/) (set as environment variable `GROQ_API_KEY`)
+- `pip` package manager
+
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Set up environment variables
+The key libraries include:
 
-Create a `.env` file in the root directory and add your **Groq API key**:
+- streamlit
+- langchain
+- langchain_groq
+- langchain_community
+- python-dotenv
+- pymupdf
 
-```
+### Environment Variables
+
+Create a `.env` file in the project root with:
+
+```env
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
 ---
 
-## 📁 Project Structure
+## Usage
+
+Run the Streamlit app:
+
+```bash
+streamlit run app.py
+```
+
+- Upload PDF files using the sidebar uploader.
+- Ask questions in the chat input about the uploaded document.
+- View the chatbot's answers and top matching document chunks.
+- Download chat history or clear the chat using sidebar buttons.
+
+---
+
+## File Structure
 
 ```
 📦rag-pdf-chatbot
@@ -57,7 +75,6 @@ GROQ_API_KEY=your_groq_api_key_here
  ┣ 📜requirements.txt    # Python dependencies
  ┗ 📜README.md           # This file
 ```
-
 ---
 
 ## ▶️ Run the App
@@ -89,17 +106,27 @@ Then, open the app in your browser (typically at [http://localhost:8501](http://
 
 ---
 
-## 🛠️ Notes
+## Notes
 
-- Only **PDF** files are supported at the moment.
-- Chroma vector store is in-memory, meaning it resets when the app restarts.
-- You must have a **Groq API key** to use the LLM.
+- Only PDF files are supported.
+- Temporary PDF files are saved in `/tmp` (Linux/macOS). Adjust as needed for Windows.
+- Rate limiting enforces minimum 5 seconds between queries.
+- Embeddings and vectorstore are persisted in `chroma_persist` directory.
 
 ---
 
-## 📃 License
+## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
+
+---
+
+## Acknowledgements
+
+- [LangChain](https://langchain.com/)
+- [Groq LLM](https://www.groq.com/)
+- [Hugging Face](https://huggingface.co/)
+- [Streamlit](https://streamlit.io/)
 
 ---
 
